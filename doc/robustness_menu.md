@@ -1,39 +1,67 @@
-# Robustness Menu (pre-registered)
+# Robustness Menu (Prop 47 SCM)
 
-## Baseline specification (S0)
-- Unit: state-month, 2010-01 to 2019-12
-- Treated unit: California
-- Outcome: theft_rate_per_100k
-- Treatment start (t0): 2014-11
-- Pre-period: 2010-01 to month < t0
-- Post-period: month >= t0
-- Donor pool: all non-CA states passing data quality screen (see DQ)
-- SCM objective: minimize pre-period squared error with constraints w>=0, sum(w)=1
-- Primary diagnostic: pre-RMSPE, post/pre RMSPE ratio, placebo p-value (ratio)
+## Baseline (S0)
+- Unit: state-month (2010-01 to 2019-12)
+- Treated: California
+- Outcomes:
+  - Primary: theft_rate_per_100k (constructed using covered population)
+  - Negative control: violent_rate_per_100k
+- Treatment start options:
+  - T0a: 2014-11
+  - T0b: 2015-01
+- Pre-period options:
+  - P0: start 2010-01 to month < t0
+  - P1: start 2012-01 to month < t0
+- SCM weights: minimize pre-period squared error subject to w>=0, sum(w)=1
+- Inference: placebo states + pre-fit (RMSPE) filtering
 
-## Data quality screen (DQ)
-- Exclude donor states with missing outcome in > 0% of pre-period months (strict) 
-  [OR > 5% (practical)]
-- (TBD) Exclude donor states with known structural breaks documented in notes.
+## Data construction (common to all specs)
+### Agency identity & aggregation
+- Agency key: ORI (state abbrev + 5 digits). ORI9 missing values caused false duplicates; ORI is complete and unique at the agency-month grain.
+- Month-level reporting flags:
+  - 2010–2019: use `number_of_months_reported`
+  - Standardize to a month-level "reported" indicator using reconstructed missing-month flags.
 
-## Robustness checks
-Each check reports:
+### Monthly inclusion rule (DQ0 baseline)
+- Include agency-month if that month is reported (true zeros retained).
+- Exclude only agency-months that are missing (not treated as 0).
+- Aggregate to state-month:
+  - theft_count = sum(theft_total across included agency-months)
+  - pop_covered = sum(pop across included agency-months)
+  - theft_rate_per_100k = theft_count / pop_covered * 100000
+  - coverage = pop_covered / state_total_pop (or agency-pop total)
+
+## Donor pool rules
+### DonorPool0 (baseline)
+- Exclude HI (coverage unstable; ~13% swings around treatment date)
+- Keep states with mean_coverage_pre >= 0.95
+
+### DonorPool1 (robustness)
+- DonorPool0 +
+- Exclude states with abs(corr(coverage, theft_rate)) > 0.5 in the PRE period only
+
+## QC findings to reference
+- Test A: all states except HI show stable coverage around treatment date
+- Test B: 34 states remain under mean_coverage_pre >= 0.95
+- Test C: 2 states have abs corr(coverage, theft_rate) > 0.5 (flagged for DonorPool1 robustness)
+
+## Spec checklist (each spec outputs same artifacts)
+Each run saves:
 - top donor weights
 - pre-RMSPE
 - post/pre RMSPE ratio
 - placebo p-value (ratio)
-- plot: treated vs synthetic + gaps
+- plots: treated vs synthetic; gap over time; placebo distribution
 
-| ID | Change from baseline | Purpose | Expected pattern if effect is real |
-|----|----------------------|---------|-----------------------------------|
-| T1 | t0 = 2015-01         | Treatment timing sensitivity | Similar sign/timing; magnitude may shift slightly |
-| P1 | pre starts 2012-01   | Reduce reliance on early years | Similar sign; pre-fit should remain good |
-| O1 | outcome = violent_rate_per_100k | Negative control | No comparable post-gap; placebos not extreme |
-| S1 | treated = CA excluding LA (if constructible) | Check LA reporting drives result | Effect persists if not LA-driven |
-| D1 | donor pool excludes high-missing states at >5% | Donor quality sensitivity | Results not driven by bad donors |
+| Spec ID | Donor pool | Outcome | t0 | Pre window |
+|--------:|------------|---------|----|------------|
+| S0      | Pool0      | theft   | 2014-11 | 2010-01 |
+| S1      | Pool0      | theft   | 2015-01 | 2010-01 |
+| S2      | Pool0      | theft   | 2014-11 | 2012-01 |
+| S3      | Pool0      | theft   | 2015-01 | 2012-01 |
+| N0      | Pool0      | violent | 2014-11 | 2010-01 |
+| D0      | Pool1      | theft   | 2014-11 | 2010-01 |
 
-## Decision rule / interpretation
-- A result is considered "robust" if:
-  - pre-RMSPE remains acceptably low across checks, AND
-  - CA remains in the extreme tail of placebo ratios (e.g., p < 0.10) in most checks, AND
-  - negative control (O1) does not show a similar pattern.
+## Placebo & filtering rule
+- Placebo: run SCM for each donor state as if treated at same t0.
+- Filter: drop placebo states with pre-RMSPE > 5x CA pre-RMSPE (sensitivity: 2x and 10x).
