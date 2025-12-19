@@ -1,0 +1,4 @@
+###What I did 
+  - Primarily focused on getting cleaning and aggregating datasets. Decided to use Jacob Kaplans pre-cleaned datasets on offenses and clearances.
+  - I was initially thinking about extending the analysis from 2010-2024, but the more I thought about it the amount of confouding that COVID interjects makes it difficult to create a robust result.
+  - I also focused on reading prior available literature on both methods and Prop 47. I wanted to highlight research done by the PPIC in 2018 and Abadie et al.'s papers on Synthetic Control Methods in 2010, 2015, and 2021. All were meaningful when continuing this project
