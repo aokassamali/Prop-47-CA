@@ -1,13 +1,13 @@
 # Data Processing Notes
 
 ## Goal
-Construct a state-month panel (2010-01 to 2019-12) for:
+Construct a state-month panel (2010-01 to 2024-12) for:
 - theft rate per 100k (primary)
 - violent crime rate per 100k (negative control)
 with explicit handling of reporting coverage/missingness.
 
 ## Raw inputs
-- Source: Jacob Kaplan UCR compilation (agency-level monthly files), 2010–2019.
+- Source: Jacob Kaplan UCR compilation (agency-level monthly files), 2010–2024.
 - Key fields used:
   - agency identifier: `ORI` (string)
   - geography: `state_abb` (and other FIPS fields retained as metadata)
@@ -15,7 +15,7 @@ with explicit handling of reporting coverage/missingness.
   - outcomes: theft total, violent total
   - population: agency population
   - reporting metadata:
-    - 2010–2019: `number_of_months_reported`
+    - 2010–2024: `number_of_months_reported`
 
 ## Agency identity (critical bug + fix)
 ### Problem encountered
@@ -35,7 +35,7 @@ with explicit handling of reporting coverage/missingness.
 
 ## Month-level reporting (missingness harmonization)
 ### Column changes by year
-- 2010–2019: `number_of_months_reported`
+- 2010–2024: `number_of_months_reported`
 
 ### Standardization approach
 - Create a unified month-level indicator `reported_{agency,month}` using reconstructed missing-month flags.
