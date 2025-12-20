@@ -36,3 +36,4 @@ Artifacts:
 ## Conclusion
 - Month-level inclusion approach yields high and stable coverage for CA (~99.5% average).
 - Baseline donor pool uses pre-period mean coverage threshold and excludes AR, HI, IN, MI, MS, MT, NE, NH, NY, OH, OR, PA, SD, UT, WV.
+- Also general exclusion of non US states DC, GU, CZ, Virgin Islands, PR.
