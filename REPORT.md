@@ -83,7 +83,7 @@ Baseline treatment start is **2014-11-01** (Prop 47 takes effect in late 2014). 
 
 **Figure 2.** Gap (treated − synthetic), baseline timing (S0).
 
-![S0 gap](outputs/figures/all_specs_summary_extended.csv)
+![S0 gap](outputs/figures/S0_gap.png)
 
 Qualitatively:
 - Pre‑period fit is reasonable (the series track fairly closely).
