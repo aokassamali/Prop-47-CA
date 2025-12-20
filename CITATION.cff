@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite it as below."
+title: "Prop-47-CA: Synthetic Control Analysis of California Proposition 47"
+type: software
+authors:
+  - family-names: Kassamali
+    given-names: Asad
+repository-code: "https://github.com/aokassamali/Prop-47-CA"
+license: MIT
+version: 1.0.0
+date-released: "2025-12-20"
+preferred-citation:
+  type: software
+  authors:
+    - family-names: Kassamali
+      given-names: Asad
+  title: "Prop-47-CA: Synthetic Control Analysis of California Proposition 47"
+  year: 2025
+  url: "https://github.com/aokassamali/Prop-47-CA"
