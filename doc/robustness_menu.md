@@ -33,16 +33,16 @@
 
 ## Donor pool rules
 ### DonorPool0 (baseline)
-- Exclude HI (coverage unstable; ~13% swings around treatment date)
+- Exclude HI (coverage unstable; ~13% swings around treatment date) & OR (coverage unstable; ~27% swings around treatment date)
 - Keep states with mean_coverage_pre >= 0.95
 
 ### DonorPool1 (robustness)
 - DonorPool0 +
-- Exclude states with abs(corr(coverage, theft_rate)) > 0.5 in the PRE period only
+- Exclude states with abs(corr(coverage, theft_rate)) > 0.5 in the PRE period only (TX & AZ)
 
 ## QC findings to reference
 - Test A: all states except HI show stable coverage around treatment date
-- Test B: 34 states remain under mean_coverage_pre >= 0.95
+- Test B: 36 states remain under mean_coverage_pre >= 0.95 (excluding CA)
 - Test C: 2 states have abs corr(coverage, theft_rate) > 0.5 (flagged for DonorPool1 robustness)
 
 ## Spec checklist (each spec outputs same artifacts)
