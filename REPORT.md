@@ -83,7 +83,7 @@ Baseline treatment start is **2014-11-01** (Prop 47 takes effect in late 2014). 
 
 **Figure 2.** Gap (treated − synthetic), baseline timing (S0).
 
-![S0 gap](outputs/figures/S0_gap.png)
+![S0 gap](outputs/figures/all_specs_summary_extended.csv)
 
 Qualitatively:
 - Pre‑period fit is reasonable (the series track fairly closely).
@@ -108,7 +108,7 @@ The table below summarizes the extended 2010–2024 run for baseline theft (S0) 
 - **S0 (theft)**: in **2022–2024**, average gap ≈ **3.44**, with placebo p-value (ratio, post2) ≈ **0.842** (not suggestive of a distinctive divergence).
 - **N0 (violent)**: placebo p-values do not provide evidence of a clear Prop‑47‑specific effect on violence in the pre‑COVID window.
 
-![S0 placebo ratios](outputs/figures/S0_placebo_ratio_dist.png)
+![All Specs Summary (CSV)](outputs/all_specs_summary_extended.csv)
 
 ---
 
