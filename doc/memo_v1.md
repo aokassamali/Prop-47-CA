@@ -16,20 +16,23 @@ Key processing choices:
 
 ## Estimand
 For treated unit CA and month *t*, let:
-- \(Y_{CA,t}(1)\) be the observed outcome under Prop 47.
-- \(Y_{CA,t}(0)\) be the counterfactual outcome had Prop 47 not occurred.
+- $Y_{CA,t}(1)$ be the observed outcome under Prop 47.
+- $Y_{CA,t}(0)$ be the counterfactual outcome had Prop 47 not occurred.
 
-The estimand is the post-treatment average treatment effect on the treated (ATT) over a post window \(\mathcal{T}_{post}\):
-\[
-ATT = \frac{1}{|\mathcal{T}_{post}|}\sum_{t \in \mathcal{T}_{post}} \left(Y_{CA,t}(1) - Y_{CA,t}(0)\right).
-\]
+The estimand is the post-treatment average treatment effect on the treated (ATT) over a post window $\\mathcal{T}_{post}$:
+
+$$
+ATT = \\frac{1}{|\\mathcal{T}_{post}|}\\sum_{t \\in \\mathcal{T}_{post}} \\left(Y_{CA,t}(1) - Y_{CA,t}(0)\\right).
+$$
 
 ## Identification strategy
-Use **Synthetic Control (SCM)** to estimate \(Y_{CA,t}(0)\) as a convex combination of donor states:
-\[
-\hat{Y}_{CA,t}(0)=\sum_{j \in \mathcal{D}} w_j Y_{j,t},\quad w_j\ge 0,\ \sum_j w_j=1
-\]
-Weights \(w\) minimize squared pre-treatment prediction error over the pre-period.
+Use **Synthetic Control (SCM)** to estimate $Y_{CA,t}(0)$ as a convex combination of donor states:
+
+$$
+\\hat{Y}_{CA,t}(0)=\\sum_{j \\in \\mathcal{D}} w_j Y_{j,t},\\quad w_j\\ge 0,\\ \\sum_j w_j=1.
+$$
+
+Weights $w$ minimize squared pre-treatment prediction error over the pre-period.
 
 ### Assumptions (informal)
 - A weighted average of donor states can approximate CA’s pre-treatment outcome path.
