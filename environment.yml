@@ -1,0 +1,17 @@
+name: prop47
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy
+  - pandas
+  - scipy
+  - matplotlib
+  - jupyterlab
+  - ipykernel
+  - statsmodels
+  - cvxpy
+  # solvers (cvxpy will pick available ones)
+  - ecos
+  - osqp
+  - scs
