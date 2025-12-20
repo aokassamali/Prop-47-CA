@@ -1,7 +1,7 @@
 # Robustness Menu (Prop 47 SCM)
 
 ## Baseline (S0)
-- Unit: state-month (2010-01 to 2019-12)
+- Unit: state-month (2010-01 to 2024-12)
 - Treated: California
 - Outcomes:
   - Primary: theft_rate_per_100k (constructed using covered population)
@@ -19,7 +19,7 @@
 ### Agency identity & aggregation
 - Agency key: ORI (state abbrev + 5 digits). ORI9 missing values caused false duplicates; ORI is complete and unique at the agency-month grain.
 - Month-level reporting flags:
-  - 2010–2019: use `number_of_months_reported`
+  - 2010–2024: use `number_of_months_reported`
   - Standardize to a month-level "reported" indicator using reconstructed missing-month flags.
 
 ### Monthly inclusion rule (DQ0 baseline)
@@ -34,6 +34,7 @@
 ## Donor pool rules
 ### DonorPool0 (baseline)
 - Exclude HI (coverage unstable; ~13% swings around treatment date) & OR (coverage unstable; ~27% swings around treatment date)
+- Exclude non-US states DC, PR, CZ, GU, and Virgin Islands
 - Keep states with mean_coverage_pre >= 0.95
 
 ### DonorPool1 (robustness)
